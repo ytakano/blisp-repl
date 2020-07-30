@@ -111,3 +111,31 @@ CTRL-D to exit
 >> (tail '())
 (Nothing)
 ```
+
+### Example 5
+
+Tuple and pattern match.
+
+```
+$ cargo run examples/ex5.blisp
+    Finished dev [unoptimized + debuginfo] target(s) in 0.05s
+     Running `target/debug/blisp-repl examples/ex5.blisp`
+(export first (x) (Pure (-> ([Int Bool]) Int))
+    (match x
+        ([n _] n)))
+
+(export second (x) (Pure (-> ([Int Bool]) Bool))
+    (match x
+        ([_ n] n)))
+
+(export none (x) (Pure (-> ([]) Bool))
+    (match x
+        ([] true)))
+CTRL-D to exit
+>> (none [])
+true
+>> (second [13 false])
+false
+>> (first [63 true])
+63
+```
