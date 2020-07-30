@@ -16,6 +16,8 @@ $ cargo run ./examples/ex1.blisp
 
 ### Example 1
 
+Function definition.
+
 ```
 $ cargo run examples/ex1
     Finished dev [unoptimized + debuginfo] target(s) in 0.07s
@@ -35,6 +37,8 @@ CTRL-D to exit
 
 ### Example 2
 
+Local function definition.
+
 ```
 $ cargo run examples/ex2.blisp
     Finished dev [unoptimized + debuginfo] target(s) in 0.03s
@@ -51,7 +55,9 @@ CTRL-D to exit
 8
 ```
 
-## Example 3
+### Example 3
+
+Algebraic data type and pattern match.
 
 ```
 $ cargo run examples/ex3.blisp
@@ -70,4 +76,38 @@ CTRL-D to exit
 0
 >> (label-test (Just 30))
 30
+```
+
+### Example 4
+
+List and pattern match.
+
+```
+$ cargo run examples/ex4.blisp
+    Finished dev [unoptimized + debuginfo] target(s) in 0.02s
+     Running `target/debug/blisp-repl examples/ex4.blisp`
+(data (Maybe t)
+    (Just t)
+    Nothing)
+
+(export head (x) (Pure (-> ('(Int)) (Maybe Int)))
+    (match x
+        ((Cons n _) (Just n))
+        (_ Nothing)))
+
+(export tail (x) (Pure (-> ('(Int)) (Maybe Int)))
+    (match x
+        (Nil Nothing)
+        ((Cons n Nil) (Just n))
+        ((Cons _ l) (tail l))))
+
+CTRL-D to exit
+>> (head '(20 30 50))
+(Just 20)
+>> (tail '(50 10 49))
+(Just 49)
+>> (head '())
+(Nothing)
+>> (tail '())
+(Nothing)
 ```
