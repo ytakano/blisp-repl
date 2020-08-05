@@ -90,25 +90,34 @@ $ cargo run examples/ex4.blisp
     (Just t)
     Nothing)
 
-(export head (x) (Pure (-> ('(Int)) (Maybe Int)))
+(export car (x) (Pure (-> ('(Int)) (Maybe Int)))
     (match x
         ((Cons n _) (Just n))
         (_ Nothing)))
 
-(export tail (x) (Pure (-> ('(Int)) (Maybe Int)))
+(export cdr (x) (Pure (-> ('(Int)) '(Int)))
+    (match x
+        ((Cons _ l) l)
+        (_ '())))
+
+(export last (x) (Pure (-> ('(Int)) (Maybe Int)))
     (match x
         (Nil Nothing)
         ((Cons n Nil) (Just n))
-        ((Cons _ l) (tail l))))
+        ((Cons _ l) (last l))))
 
 CTRL-D to exit
->> (head '(20 30 50))
-(Just 20)
->> (tail '(50 10 49))
-(Just 49)
->> (head '())
+>> (cdr '(1 2 3))
+(Cons 2 (Cons 3 (Nil)))
+>> (cdr '())
+(Nil)
+>> (car '(3 5 2))
+(Just 3)
+>> (car '())
 (Nothing)
->> (tail '())
+>> (last '(5 7 3))
+(Just 3)
+>> (last '())
 (Nothing)
 ```
 
