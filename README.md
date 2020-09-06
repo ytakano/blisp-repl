@@ -108,17 +108,17 @@ $ cargo run examples/ex4.blisp
 
 CTRL-D to exit
 >> (cdr '(1 2 3))
-(Cons 2 (Cons 3 (Nil)))
+(Cons 2 (Cons 3 Nil))
 >> (cdr '())
-(Nil)
+Nil
 >> (car '(3 5 2))
 (Just 3)
 >> (car '())
-(Nothing)
+Nothing
 >> (last '(5 7 3))
 (Just 3)
 >> (last '())
-(Nothing)
+Nothing
 ```
 
 ### Example 5
