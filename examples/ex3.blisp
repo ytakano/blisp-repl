@@ -1,8 +1,4 @@
-(data (Maybe t)
-    (Just t)
-    Nothing)
-
-(export label-test (x) (Pure (-> ((Maybe Int)) Int))
+(export label-test (x) (Pure (-> ((Option Int)) Int))
     (match x
-        ((Just x) x)
-        (Nothing 0)))
+        ((Some x) x)
+        (None 0)))

@@ -63,19 +63,17 @@ Algebraic data type and pattern match.
 $ cargo run examples/ex3.blisp
     Finished dev [unoptimized + debuginfo] target(s) in 0.02s
      Running `target/debug/blisp-repl examples/ex3.blisp`
-(data (Maybe t)
-    (Just t)
-    Nothing)
-
-(export label-test (x) (Pure (-> ((Maybe Int)) Int))
+(export label-test (x) (Pure (-> ((Option Int)) Int))
     (match x
-        ((Just x) x)
-        (Nothing 0)))
+        ((Some x) x)
+        (None 0)))
 CTRL-D to exit
->> (label-test Nothing)
+>> (label-test (Some 10))
+10
+>> (label-test None)
 0
->> (label-test (Just 30))
-30
+>>
+CTRL-D
 ```
 
 ### Example 4
@@ -86,24 +84,10 @@ List and pattern match.
 $ cargo run examples/ex4.blisp
     Finished dev [unoptimized + debuginfo] target(s) in 0.02s
      Running `target/debug/blisp-repl examples/ex4.blisp`
-(data (Maybe t)
-    (Just t)
-    Nothing)
-
-(export car (x) (Pure (-> ('(Int)) (Maybe Int)))
+(export last (x) (Pure (-> ('(Int)) (Option Int)))
     (match x
-        ((Cons n _) (Just n))
-        (_ Nothing)))
-
-(export cdr (x) (Pure (-> ('(Int)) '(Int)))
-    (match x
-        ((Cons _ l) l)
-        (_ '())))
-
-(export last (x) (Pure (-> ('(Int)) (Maybe Int)))
-    (match x
-        (Nil Nothing)
-        ((Cons n Nil) (Just n))
+        (Nil None)
+        ((Cons n Nil) (Some n))
         ((Cons _ l) (last l))))
 
 CTRL-D to exit
@@ -112,13 +96,13 @@ CTRL-D to exit
 >> (cdr '())
 Nil
 >> (car '(3 5 2))
-(Just 3)
+(Some 3)
 >> (car '())
-Nothing
+None
 >> (last '(5 7 3))
-(Just 3)
+(Some 3)
 >> (last '())
-Nothing
+None
 ```
 
 ### Example 5

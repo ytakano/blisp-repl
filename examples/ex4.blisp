@@ -1,19 +1,5 @@
-(data (Maybe t)
-    (Just t)
-    Nothing)
-
-(export car (x) (Pure (-> ('(Int)) (Maybe Int)))
+(export last (x) (Pure (-> ('(Int)) (Option Int)))
     (match x
-        ((Cons n _) (Just n))
-        (_ Nothing)))
-
-(export cdr (x) (Pure (-> ('(Int)) '(Int)))
-    (match x
-        ((Cons _ l) l)
-        (_ '())))
-
-(export last (x) (Pure (-> ('(Int)) (Maybe Int)))
-    (match x
-        (Nil Nothing)
-        ((Cons n Nil) (Just n))
+        (Nil None)
+        ((Cons n Nil) (Some n))
         ((Cons _ l) (last l))))
