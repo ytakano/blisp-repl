@@ -39,7 +39,14 @@ fn run_repl(code: &String, ctx: &blisp::semantics::Context) {
                 match result {
                     Ok(rs) => {
                         for r in &rs {
-                            println!("{}", r);
+                            match r {
+                                Ok(msg) => {
+                                    println!("{}", msg);
+                                }
+                                Err(msg) => {
+                                    println!("error: {}", msg);
+                                }
+                            }
                         }
                     }
                     Err(e) => {
