@@ -7,5 +7,7 @@ edition = "2018"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-blisp = { git = "https://github.com/ytakano/blisp.git" }
 rustyline = "7.1.0"
+
+[dependencies.blisp]
+version = "0.2.0"
