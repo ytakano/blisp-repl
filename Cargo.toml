@@ -1,6 +1,6 @@
 [package]
 name = "blisp-repl"
-version = "0.1.0"
+version = "0.2.0"
 authors = ["Yuuki Takano <ytakanoster@gmail.com>"]
 edition = "2018"
 
@@ -8,4 +8,4 @@ edition = "2018"
 
 [dependencies]
 blisp = { git = "https://github.com/ytakano/blisp.git" }
-rustyline = "6.2.0"
+rustyline = "7.1.0"
