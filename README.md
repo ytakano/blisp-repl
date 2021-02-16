@@ -23,9 +23,12 @@ $ cargo run examples/ex1
     Finished dev [unoptimized + debuginfo] target(s) in 0.07s
      Running `target/debug/blisp-repl examples/ex1.blisp`
 (export factorial (n) (Pure (-> (Int) Int))
+    (factorial' n 1))
+
+(defun factorial' (n total) (Pure (-> (Int Int) Int))
     (if (<= n 0)
-        1
-        (* n (factorial (- n 1)))))
+        total
+        (factorial' (- n 1) (* n total))))
 CTRL-D to exit
 >> (factorial 10)
 3628800
