@@ -137,3 +137,20 @@ false
 >> (first [63 true])
 63
 ```
+
+### Example 6
+
+Call Rust's function.
+
+```
+$ cargo run ./examples/ex6.lisp
+    Finished dev [unoptimized + debuginfo] target(s) in 0.03s
+     Running `target/debug/blisp-repl ./examples/ex6.lisp`
+(export callback (x y z)
+    (IO (-> (Int Int Int) (Option Int)))
+    (call-rust x y z))
+CTRL-D to exit
+>> (callback 10 20 30)
+Rust's function is called: n = 6000
+(Some 6000)
+```

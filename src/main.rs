@@ -1,4 +1,5 @@
 use blisp;
+use num_bigint::BigInt;
 use rustyline::error::ReadlineError;
 use rustyline::Editor;
 use std::{env, fs};
@@ -9,7 +10,15 @@ fn run_lisp(code: &String) {
         Ok(exprs) => {
             // typing
             match blisp::typing(&exprs) {
-                Ok(ctx) => {
+                Ok(mut ctx) => {
+                    // set callback function
+                    let fun = |x: &BigInt, y: &BigInt, z: &BigInt| {
+                        let n = x * y * z;
+                        println!("Rust's function is called: n = {}", n);
+                        Some(n)
+                    };
+                    ctx.set_callback(Box::new(fun));
+
                     println!("{}", code);
                     run_repl(code, &ctx);
                 }
