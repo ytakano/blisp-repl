@@ -1,6 +1,6 @@
 [package]
 name = "blisp-repl"
-version = "0.3.2"
+version = "0.3.3"
 authors = ["Yuuki Takano <ytakanoster@gmail.com>"]
 edition = "2018"
 
