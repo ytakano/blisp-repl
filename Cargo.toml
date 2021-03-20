@@ -1,17 +1,17 @@
 [package]
 name = "blisp-repl"
-version = "0.3.5"
+version = "0.3.6"
 authors = ["Yuuki Takano <ytakanoster@gmail.com>"]
 edition = "2018"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-rustyline = "7.1.0"
+rustyline = "8.0.0"
 
 [dependencies.blisp]
-version = "0.3.5"
+version = "0.3.6"
 
 [dependencies.num-bigint]
-version = "0.3.1"
+version = "0.4.0"
 default-features = false
