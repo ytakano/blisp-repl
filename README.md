@@ -1,14 +1,24 @@
 # BLisp's repl
 
-https://ytakano.github.io/blisp/
+Please visit [blisp](https://ytakano.github.io/blisp/) to see the lanugage detail.
 
-## Build
+## Install and Run
 
 ```
-$ cargo build
+$ cargo install blisp-repl
+$ blisp-repl
+CTRL-D to exit
+>> (+ 0x10 0x20)
+48
+>> (map (lambda (x) (* x 2)) '(8 9 10))
+'(16 18 20)
+>> "Hello World!"
+"Hello World!"
+>> (chars "Hello, World!")
+'(`H` `e` `l` `l` `o` `,` ` ` `W` `o` `r` `l` `d` `!`)
 ```
 
-## Run (and Build if necessary)
+## Run from Source (and Build if necessary)
 
 ```
 $ cargo run ./examples/ex1.lisp
