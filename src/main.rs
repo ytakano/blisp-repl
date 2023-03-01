@@ -35,18 +35,16 @@
 //! - Big integer
 //! - Supporting no_std environments
 
-use blisp;
 use num_bigint::BigInt;
 use rustyline::error::ReadlineError;
-use rustyline::Editor;
-use std::{env, fs};
+use std::{env, error::Error, fs};
 
-fn run_lisp(code: &String) {
+fn run_lisp(code: &str) {
     // initialize
-    match blisp::init(&code) {
+    match blisp::init(code, vec![]) {
         Ok(exprs) => {
             // typing
-            match blisp::typing(&exprs) {
+            match blisp::typing(exprs) {
                 Ok(mut ctx) => {
                     // set callback function
                     let fun = |x: &BigInt, y: &BigInt, z: &BigInt| {
@@ -57,7 +55,7 @@ fn run_lisp(code: &String) {
                     ctx.set_callback(Box::new(fun));
 
                     println!("{}", code);
-                    run_repl(code, &ctx);
+                    let _ = run_repl(code, &ctx);
                 }
                 Err(e) => {
                     println!("{}:{}: {}", e.pos.line + 1, e.pos.column + 1, e.msg);
@@ -70,8 +68,8 @@ fn run_lisp(code: &String) {
     }
 }
 
-fn run_repl(code: &String, ctx: &blisp::semantics::Context) {
-    let mut rl = Editor::<()>::new();
+fn run_repl(code: &str, ctx: &blisp::semantics::Context) -> Result<(), Box<dyn Error>> {
+    let mut rl = rustyline::DefaultEditor::new()?;
     if rl.load_history("history.txt").is_err() {
         println!("No previous history.");
     }
@@ -80,7 +78,7 @@ fn run_repl(code: &String, ctx: &blisp::semantics::Context) {
         let readline = rl.readline(">> ");
         match readline {
             Ok(line) => {
-                rl.add_history_entry(line.as_str());
+                let _ = rl.add_history_entry(line.as_str());
                 let result = blisp::eval(&line, ctx);
                 match result {
                     Ok(rs) => {
@@ -115,6 +113,8 @@ fn run_repl(code: &String, ctx: &blisp::semantics::Context) {
         }
     }
     rl.save_history("history.txt").unwrap();
+
+    Ok(())
 }
 
 fn main() {
